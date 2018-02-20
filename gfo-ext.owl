@@ -11,4 +11,34 @@ Prefix(gfo-ext:=<http://www.onto-med.de/ontologies/gfo-ext#>)
 Ontology(<http://www.onto-med.de/ontologies/gfo-ext>
 Import(<http://www.onto-med.de/ontologies/gfo.owl>)
 
+Declaration(Class(gfo-ext:Attributive))
+Declaration(Class(gfo-ext:Disposition))
+Declaration(Class(gfo-ext:Quality))
+Declaration(ObjectProperty(gfo-ext:bears))
+
+############################
+#   Classes
+############################
+
+# Class: gfo-ext:Attributive (gfo-ext:Attributive)
+
+SubClassOf(gfo-ext:Attributive gfo:Individual)
+
+# Class: gfo-ext:Disposition (gfo-ext:Disposition)
+
+SubClassOf(gfo-ext:Disposition gfo-ext:Attributive)
+
+# Class: gfo-ext:Quality (gfo-ext:Quality)
+
+SubClassOf(gfo-ext:Quality gfo-ext:Attributive)
+
+# Class: gfo:Relator (gfo:Relator)
+
+SubClassOf(gfo:Relator gfo-ext:Attributive)
+
+# Class: gfo:Role (gfo:Role)
+
+SubClassOf(gfo:Role gfo-ext:Attributive)
+
+
 )
