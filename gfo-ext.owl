@@ -15,6 +15,24 @@ Declaration(Class(gfo-ext:Attributive))
 Declaration(Class(gfo-ext:Disposition))
 Declaration(Class(gfo-ext:Quality))
 Declaration(ObjectProperty(gfo-ext:bears))
+Declaration(ObjectProperty(gfo-ext:borne_by))
+Declaration(AnnotationProperty(gfo-ext:question))
+
+############################
+#   Object Properties
+############################
+
+# Object Property: gfo-ext:bears (gfo-ext:bears)
+
+InverseObjectProperties(gfo-ext:bears gfo-ext:borne_by)
+ObjectPropertyDomain(gfo-ext:bears gfo:Individual)
+ObjectPropertyRange(gfo-ext:bears gfo-ext:Attributive)
+
+# Object Property: gfo-ext:borne_by (gfo-ext:borne_by)
+
+SubObjectPropertyOf(gfo-ext:borne_by gfo:depends_on)
+
+
 
 ############################
 #   Classes
@@ -22,15 +40,22 @@ Declaration(ObjectProperty(gfo-ext:bears))
 
 # Class: gfo-ext:Attributive (gfo-ext:Attributive)
 
+AnnotationAssertion(gfo-ext:question gfo-ext:Attributive "Another subclass of Attributve is (according to the gfo-data paper, page 3, paragraph 3) \"structural feature\". Do structural features have a corresponding entity in gfo.owl? Is MaterialStructure what we are looking for?"@en)
 SubClassOf(gfo-ext:Attributive gfo:Individual)
+SubClassOf(gfo-ext:Attributive ObjectSomeValuesFrom(gfo-ext:borne_by gfo:Individual))
 
 # Class: gfo-ext:Disposition (gfo-ext:Disposition)
 
+AnnotationAssertion(gfo-ext:question gfo-ext:Disposition "Mentioned in papers, but not part of the ontology. Why?"@en)
 SubClassOf(gfo-ext:Disposition gfo-ext:Attributive)
 
 # Class: gfo-ext:Quality (gfo-ext:Quality)
 
 SubClassOf(gfo-ext:Quality gfo-ext:Attributive)
+
+# Class: gfo:Function (gfo:Function)
+
+SubClassOf(Annotation(gfo-ext:question "In the gfo-data paper, it is explanied that functions are attributives (p. 3, third paragraph). This is in contradiction to the statement that attributives are individuals (same paragraph)."@en) gfo:Function gfo-ext:Attributive)
 
 # Class: gfo:Relator (gfo:Relator)
 
@@ -39,6 +64,10 @@ SubClassOf(gfo:Relator gfo-ext:Attributive)
 # Class: gfo:Role (gfo:Role)
 
 SubClassOf(gfo:Role gfo-ext:Attributive)
+
+# Class: gfo:Symbol_structure (gfo:Symbol_structure)
+
+EquivalentClasses(gfo:Symbol_structure ObjectSomeValuesFrom(gfo:has_token gfo:Token))
 
 
 )
