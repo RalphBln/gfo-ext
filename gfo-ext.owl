@@ -16,6 +16,8 @@ Declaration(Class(gfo-ext:Disposition))
 Declaration(Class(gfo-ext:Quality))
 Declaration(ObjectProperty(gfo-ext:bears))
 Declaration(ObjectProperty(gfo-ext:borne_by))
+Declaration(ObjectProperty(gfo-ext:captures))
+Declaration(AnnotationProperty(gfo-ext:issue))
 Declaration(AnnotationProperty(gfo-ext:question))
 
 ############################
@@ -25,12 +27,16 @@ Declaration(AnnotationProperty(gfo-ext:question))
 # Object Property: gfo-ext:bears (gfo-ext:bears)
 
 InverseObjectProperties(gfo-ext:bears gfo-ext:borne_by)
-ObjectPropertyDomain(gfo-ext:bears gfo:Individual)
+ObjectPropertyDomain(gfo-ext:bears ObjectUnionOf(gfo-ext:Attributive gfo:Material_object gfo:Process))
 ObjectPropertyRange(gfo-ext:bears gfo-ext:Attributive)
 
 # Object Property: gfo-ext:borne_by (gfo-ext:borne_by)
 
 SubObjectPropertyOf(gfo-ext:borne_by gfo:depends_on)
+
+# Object Property: gfo-ext:captures (gfo-ext:captures)
+
+SubObjectPropertyOf(gfo-ext:captures gfo:depends_on)
 
 
 
@@ -41,6 +47,7 @@ SubObjectPropertyOf(gfo-ext:borne_by gfo:depends_on)
 # Class: gfo-ext:Attributive (gfo-ext:Attributive)
 
 AnnotationAssertion(gfo-ext:question gfo-ext:Attributive "Another subclass of Attributve is (according to the gfo-data paper, page 3, paragraph 3) \"structural feature\". Do structural features have a corresponding entity in gfo.owl? Is MaterialStructure what we are looking for?"@en)
+AnnotationAssertion(gfo-ext:question gfo-ext:Attributive "The gfo-data paper introduces Attributives as fundamental entities, but they do not seem to have made it into the owl ontology (yet). Why?"@en)
 SubClassOf(gfo-ext:Attributive gfo:Individual)
 SubClassOf(gfo-ext:Attributive ObjectSomeValuesFrom(gfo-ext:borne_by gfo:Individual))
 
@@ -53,9 +60,9 @@ SubClassOf(gfo-ext:Disposition gfo-ext:Attributive)
 
 SubClassOf(gfo-ext:Quality gfo-ext:Attributive)
 
-# Class: gfo:Function (gfo:Function)
+# Class: gfo:Concept (gfo:Concept)
 
-SubClassOf(Annotation(gfo-ext:question "In the gfo-data paper, it is explanied that functions are attributives (p. 3, third paragraph). This is in contradiction to the statement that attributives are individuals (same paragraph)."@en) gfo:Function gfo-ext:Attributive)
+EquivalentClasses(gfo:Concept ObjectExactCardinality(1 gfo-ext:captures gfo:Universal))
 
 # Class: gfo:Relator (gfo:Relator)
 
@@ -67,7 +74,9 @@ SubClassOf(gfo:Role gfo-ext:Attributive)
 
 # Class: gfo:Symbol_structure (gfo:Symbol_structure)
 
-EquivalentClasses(gfo:Symbol_structure ObjectSomeValuesFrom(gfo:has_token gfo:Token))
+EquivalentClasses(gfo:Symbol_structure ObjectSomeValuesFrom(gfo:has_token gfo:Concrete))
 
 
+AnnotationAssertion(gfo-ext:question gfo:Function "The comment says that \"a function F is a universal\", but functions are concepts, and the class of Concepts is disjoint with the class of Universals."@en)
+AnnotationAssertion(rdfs:comment gfo:Function "This is about intention and goals."@en)
 )
